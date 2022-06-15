@@ -6,7 +6,7 @@ function list() {
 
 function listShowing() {
     return db("movies as m")
-    .join("movie_theaters as mt", "mt.movie_id", "m.movie_id")
+    .join("movies_theaters as mt", "mt.movie_id", "m.movie_id")
     .where({"mt.is_showing": true});
 }
 
