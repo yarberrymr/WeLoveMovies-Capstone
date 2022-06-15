@@ -30,13 +30,35 @@ async function read(req, res) {
 }
 
 //listReviews
-
+async function listReviews(req, res) {
+  const movieId = res.locals.movie.movie_id;
+  const reviews = await service.listReviews(movieId);
+  const allReviews = [];
+  reviews.forEach(review => {
+    const critic = await service.getCritics(review.critic_id);
+    review.critic = critic[0];
+    allReviews.push(review);
+  });
+  res.status(200).json({ data: allReviews });
+}
 
 //listTheaters
-
+async function listTheaters(req, res) {
+  const movieId = res.locals.movie.movie_id;
+  const result = await service.listTheaters(movieId);
+  res.status(200).json({ data: result });
+}
 
 //module exports
 module.exports = {
-    list: [asyncErrorBoundary(list)],
-    read: [asyncErrorBoundary(paramsCheck), asyncErrorBoundary(read)]
-}
+  list: [asyncErrorBoundary(list)],
+  read: [asyncErrorBoundary(paramsCheck), asyncErrorBoundary(read)],
+  listReviews: [
+    asyncErrorBoundary(paramsCheck),
+    asyncErrorBoundary(listReviews),
+  ],
+  listTheaters: [
+    asyncErrorBoundary(paramsCheck),
+    asyncErrorBoundary(listTheaters),
+  ],
+};
