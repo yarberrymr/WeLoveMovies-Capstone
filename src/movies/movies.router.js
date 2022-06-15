@@ -3,17 +3,17 @@ const controller = require("./movies.controller");
 const methodNotAllowed = require("../utils/errors/methodNotAllowed");
 
 router
-    .route("/movies/:movieId/reviews")
-    .get(controller.listReviews)
-    .all(methodNotAllowed);
+  .route("/:movieId/theaters")
+  .get(controller.listTheaters)
+  .all(methodNotAllowed);
 
 router
-    .route("/movies/:movieId/theaters")
-    .get(controller.listTheaters)
-    .all(methodNotAllowed);
+  .route("/:movieId/reviews")
+  .get(controller.listReviews)
+  .all(methodNotAllowed);
 
 router
-    .route("/movies/:movieId")
+    .route("/:movieId")
     .get(controller.read)
     .all(methodNotAllowed);
 
@@ -22,4 +22,4 @@ router
     .get(controller.list)
     .all(methodNotAllowed);
 
-module.exports = router
+module.exports = router;
