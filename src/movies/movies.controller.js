@@ -34,11 +34,12 @@ async function listReviews(req, res) {
   const movieId = res.locals.movie.movie_id;
   const reviews = await service.listReviews(movieId);
   const allReviews = [];
-  reviews.forEach(review => {
+  for (let i = 0; i < reviews.length; i++) {
+    const review = reviews[i];
     const critic = await service.getCritics(review.critic_id);
     review.critic = critic[0];
     allReviews.push(review);
-  });
+  }
   res.status(200).json({ data: allReviews });
 }
 
