@@ -1,3 +1,5 @@
+//Migrate script to create and drop the critics table used for reviews
+
 exports.up = function (knex) {
     return knex.schema.createTable("critics", (table) => {
       table.increments("critic_id").primary();
