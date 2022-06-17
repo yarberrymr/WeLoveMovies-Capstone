@@ -1,3 +1,5 @@
+//Migrate script to create and drop the theaters table
+
 exports.up = function (knex) {
     return knex.schema.createTable("theaters", (table) => {
       table.increments("theater_id").primary();
