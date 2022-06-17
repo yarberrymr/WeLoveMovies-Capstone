@@ -1,7 +1,7 @@
 const service = require("./movies.service");
 const asyncErrorBoundary = require("../utils/errors/asyncErrorBoundary");
 
-//paramscheck
+//paramscheck for existing movie id prior to reading the movie
 const paramsCheck = async (req, res, next) => {
     const { movieId } = req.params;
     const match = await service.read(Number(movieId));
@@ -14,7 +14,7 @@ const paramsCheck = async (req, res, next) => {
     next();
   };
 
-//list
+//list function that will list all movies currently showing
 async function list(req, res) {
     const {is_showing} = req.query;
     const data = is_showing
@@ -24,12 +24,12 @@ async function list(req, res) {
     res.status(200).json({data: data });
 }
 
-//read
+//read function to read movie by movie id
 async function read(req, res) {
     res.status(200).json({data: res.locals.movie})
 }
 
-//listReviews
+//listReviews function to show all reviews by movie id
 async function listReviews(req, res) {
   const movieId = res.locals.movie.movie_id;
   const reviews = await service.listReviews(movieId);
@@ -43,7 +43,7 @@ async function listReviews(req, res) {
   res.status(200).json({ data: allReviews });
 }
 
-//listTheaters
+//listTheaters function to show all theaters by movie id
 async function listTheaters(req, res) {
   const movieId = res.locals.movie.movie_id;
   const result = await service.listTheaters(movieId);
