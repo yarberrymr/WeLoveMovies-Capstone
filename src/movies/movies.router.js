@@ -1,3 +1,5 @@
+//Routes for controller methods including methodNotAllowed for all non-coded http requests
+
 const router = require("express").Router();
 const controller = require("./movies.controller");
 const methodNotAllowed = require("../utils/errors/methodNotAllowed");
