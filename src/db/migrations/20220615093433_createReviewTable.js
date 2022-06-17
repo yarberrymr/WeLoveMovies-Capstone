@@ -1,3 +1,5 @@
+//Migrate script to create and drop the reviews table, including foregin keys from movies and critics table
+
 exports.up = function (knex) {
     return knex.schema.createTable("reviews", (table) => {
       table.increments("review_id").primary();
