@@ -1,7 +1,7 @@
 const service = require("./reviews.service");
 const asyncErrorBoundary = require("../utils/errors/asyncErrorBoundary");
 
-//paramsCheck
+//paramsCheck for existing review before reading the review
 async function paramsCheck(req, res, next) {
     const { reviewId } = req.params;
     const match = await service.read(reviewId);
@@ -12,7 +12,7 @@ async function paramsCheck(req, res, next) {
     next();
   }
 
-//bodyCheck
+//bodyCheck for existing content in the body of the review prior to updating the review
 function bodyCheck(req, res, next) {
   const { data: { score = null, content = null } = {} } = req.body;
   let updateObj = {};
@@ -24,18 +24,18 @@ function bodyCheck(req, res, next) {
   next();
 }
 
-//list
+//list function o show all reviews
 async function list(req, res) {
   const reviews = await service.list();
   res.status(200).json({ data: reviews });
 }
 
-//read
+//read function to show chosen review
 async function read(req, res) {
     res.status(200).json({data: res.locals.review})
 }
 
-//put
+//put function to update chosen review
 async function put(req, res) {
   const { critic_id, review_id } = res.locals.review;
   const update = res.locals.update;
@@ -45,7 +45,7 @@ async function put(req, res) {
   res.status(200).json({ data: { ...updatedReview[0], critic: critic[0] } });
 }
 
-//destroy
+//destroy function to delete chosen review
 async function destroy(req, res) {
   const { review_id } = res.locals.review;
   await service.destroy(review_id);
