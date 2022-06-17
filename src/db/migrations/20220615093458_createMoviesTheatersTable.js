@@ -1,3 +1,6 @@
+//Migrate script to create and drop the movies/theaters table
+//with foreign keys from the movies and theaters tables
+
 const { table } = require("../connection");
 
 exports.up = function (knex) {
