@@ -1,3 +1,5 @@
+//Routes for reviewId route, including methodNotAllowed for any non-coded routes
+
 const router = require("express").Router();
 const controller = require("./reviews.controller");
 const methodNotAllowed = require("../utils/errors/methodNotAllowed");
