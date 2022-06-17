@@ -1,3 +1,4 @@
+//async error check function
 function asyncErrorBoundary(delegate, defaultStatus) {
     return (req, res, next) => {
       Promise.resolve()
